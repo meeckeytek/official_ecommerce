@@ -1,0 +1,21 @@
+import mongoose from "mongoose";
+
+const orderSchema = new mongoose.Schema(
+  {
+    orderedProducts: [],
+    shippingDetails: {},
+    // reference: { type: String },
+    paymentMethod: { type: String, default: "Payment on Delivery" },
+    totalPrice: { type: String },
+    user: { type: mongoose.Types.ObjectId, ref: "User" },
+    isPaid: { type: String, default: "False" },
+    paidAt: { type: Date, default:""},
+    isDelivered: { type: String, default: "False" },
+    deliveredAt: { type: Date, default:"" },
+  },
+  {
+    timestamps: true,
+  }
+);
+
+export default mongoose.model("Order", orderSchema);
