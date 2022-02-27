@@ -4,7 +4,6 @@ const orderSchema = new mongoose.Schema(
   {
     orderedProducts: [],
     shippingDetails: {},
-    // reference: { type: String },
     paymentMethod: { type: String, default: "Payment on Delivery" },
     totalPrice: { type: String },
     user: { type: String},

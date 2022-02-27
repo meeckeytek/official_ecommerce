@@ -318,9 +318,6 @@ export const deleteOrder = async (req: any, res: any) => {
    await product.save()
   }
 
-
-  //Increase the product count
-
   const newDelete = new Trash({
     recycleBin: {
       order,
@@ -333,8 +330,8 @@ export const deleteOrder = async (req: any, res: any) => {
   });
 
   try {
-    // await newDelete.save();
-    // await order.remove();
+    await newDelete.save();
+    await order.remove();
   } catch (error) {
     return res.status(500).json({ message: msg.serverError });
   }
