@@ -25,12 +25,12 @@ export const getAllUsers = async (req: any, res: any) => {
   };
 
   const retrievedCounts = await User.countDocuments(searchQuery);
-  User.countDocuments(searchQuery).then((usersCount) => {
+  User.countDocuments(searchQuery).then((usersCount:any) => {
     User.find(searchQuery)
       .sort(sortQuery)
       .limit(limit)
       .skip(page * limit - limit)
-      .then((users) => {
+      .then((users:any) => {
         return res.json({
           users,
           pagination: {
@@ -53,7 +53,7 @@ export const getAllUsers = async (req: any, res: any) => {
           },
         });
       })
-      .catch((err) => console.log(err));
+      .catch((err:any) =>res.status(500).json({message: msg.serverError}));
   });
 };
 
@@ -123,8 +123,12 @@ export const auth = async (req: any, res: any) => {
     return res.status(500).json({ message: msg.serverError });
   }
 
-  if (!user) {
+  if (!user ) {
     return res.status(404).json({ message: msg.notFound });
+  }
+
+  if (user.disabled == true ) {
+    return res.status(422).json({ message: msg.accountDisable });
   }
 
   let isValidPassword;

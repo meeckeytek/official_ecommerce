@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose, { Mongoose } from "mongoose";
 
 const orderSchema = new mongoose.Schema(
   {
@@ -7,7 +7,7 @@ const orderSchema = new mongoose.Schema(
     // reference: { type: String },
     paymentMethod: { type: String, default: "Payment on Delivery" },
     totalPrice: { type: String },
-    user: { type: mongoose.Types.ObjectId, ref: "User" },
+    user: { type: String},
     isPaid: { type: String, default: "False" },
     paidAt: { type: Date, default:""},
     isDelivered: { type: String, default: "False" },

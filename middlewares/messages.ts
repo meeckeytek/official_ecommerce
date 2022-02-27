@@ -14,6 +14,11 @@ const msg = {
       code: 422,
       Message: "Please check all inputs for validity",
     },
+    accountDisable: {
+      status: "Faild",
+      code: 422,
+      Message: "Account disabled, please contact admin",
+    },
   
     newInputSuccess: {
       status: "Success",

@@ -4,7 +4,7 @@ const trashSchema = new mongoose.Schema(
   {
     recycleBin: {},
     doneBy: {
-      userId: { type: mongoose.Types.ObjectId, ref: "user" },
+      userId: { type: String },
       userFullname: { type: String },
     },
     deleteType:{type: String}

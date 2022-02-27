@@ -2,7 +2,7 @@ import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
 import path from "path"
-import * as dotenv from "dotenv";
+import dotenv from "dotenv";
 import userRoute from "./routes/usersRoute";
 import productRoute from "./routes/productRoute";
 import orderRoute from "./routes/orderRoute";
@@ -24,10 +24,6 @@ app.use("/api/v1/product", productRoute);
 app.use("/api/v1/order", orderRoute);
 app.use("/api/v1/trash", trashRoute);
 
-app.get("/api/v1", (req: any, res: any)=>{
-  res.status(200).json({message: "Working perfectly"})
-})
-
 mongoose
   .connect(process.env.URI!, {
     useNewUrlParser: true,
@@ -36,7 +32,7 @@ mongoose
     useFindAndModify: false,
   })
   .then(() => {
-    const port = process.env.PORT || 1253;
+    const port = process.env.PORT || 1249;
     app.listen(port, () => console.log(`listening on port ${port}`));
   })
   .catch((err) => {

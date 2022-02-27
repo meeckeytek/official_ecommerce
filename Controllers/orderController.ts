@@ -24,12 +24,12 @@ export const getAllOrder = async (req: any, res: any) => {
   };
 
   const retrievedCounts = await Order.countDocuments(searchQuery);
-  Order.countDocuments(searchQuery).then((ordersCount) => {
+  Order.countDocuments(searchQuery).then((ordersCount:any) => {
     Order.find(searchQuery)
       .sort(sortQuery)
       .limit(limit)
       .skip(page * limit - limit)
-      .then((orders) => {
+      .then((orders:any) => {
         return res.json({
           orders,
           pagination: {
@@ -45,14 +45,14 @@ export const getAllOrder = async (req: any, res: any) => {
           links: {
             prevLink: `http://${
               req.headers.host
-            }/api/v1/product/allOrders?&page=${page - 1}&limit=${limit}`,
-            nextLink: `http://${req.headers.host}/api/v1/user/allOrders?&page=${
+            }/api/v1/order/allOrders?&page=${page - 1}&limit=${limit}`,
+            nextLink: `http://${req.headers.host}/api/v1/order/allOrders?&page=${
               page + 1
             }&limit=${limit}`,
           },
         });
       })
-      .catch((err) => console.log(err));
+      .catch((err: any) => res.status(500).json({message: msg.serverError}));
   });
 };
 
@@ -307,6 +307,20 @@ export const deleteOrder = async (req: any, res: any) => {
     return res.status(403).json({ message: msg.notAuthorized });
   }
 
+  for(let i = 0;  i < order.orderedProducts.length; i++){
+    let product:any;
+    try {
+      product = await Product.findById(order.orderedProducts[i].product._id)
+    } catch (error) {
+      return res.status(500).json({message: msg.serverError})
+    }
+    product.countInStock += order.orderedProducts[i].quantity;
+   await product.save()
+  }
+
+
+  //Increase the product count
+
   const newDelete = new Trash({
     recycleBin: {
       order,
@@ -319,8 +333,8 @@ export const deleteOrder = async (req: any, res: any) => {
   });
 
   try {
-    await newDelete.save();
-    await order.remove();
+    // await newDelete.save();
+    // await order.remove();
   } catch (error) {
     return res.status(500).json({ message: msg.serverError });
   }

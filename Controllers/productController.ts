@@ -23,12 +23,12 @@ export const getAllProducts = async (req: any, res: any) => {
   };
 
   const retrievedCounts = await Product.countDocuments(searchQuery);
-  Product.countDocuments(searchQuery).then((productsCount) => {
+  Product.countDocuments(searchQuery).then((productsCount:any) => {
     Product.find(searchQuery)
       .sort(sortQuery)
       .limit(limit)
       .skip(page * limit - limit)
-      .then((products) => {
+      .then((products:any) => {
         return res.json({
           products,
           pagination: {
@@ -51,7 +51,7 @@ export const getAllProducts = async (req: any, res: any) => {
           },
         });
       })
-      .catch((err) => console.log(err));
+      .catch((err: String) =>res.status(500).json({message: msg.serverError}));
   });
 };
 
