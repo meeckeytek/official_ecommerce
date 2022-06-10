@@ -22,7 +22,7 @@ export const resetPasswordToken = (user: any) => {
     { userId: user.id, userEmail: user.email },
     `${process.env.JWT_KEY}`,
     { expiresIn: "1s" }
-  ); 
+  );
 };
 
 export const isAuth = (req: Request | any, res: Response | any, next: any) => {
