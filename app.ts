@@ -24,17 +24,15 @@ app.use("/api/v1/product", productRoute);
 app.use("/api/v1/order", orderRoute);
 app.use("/api/v1/trash", trashRoute);
 
+mongoose.set('useNewUrlParser', true);
+mongoose.set('useFindAndModify', false);
+mongoose.set('useCreateIndex', true);
 mongoose
-  .connect(process.env.URI!, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useCreateIndex: true,
-    useFindAndModify: false,
-  })
+  .connect(process.env.URI!)
   .then(() => {
     const port = process.env.PORT || 1249;
     app.listen(port, () => console.log(`listening on port ${port}`));
   })
-  .catch((err) => {
+  .catch((err: any) => {
     console.log(err);
   });

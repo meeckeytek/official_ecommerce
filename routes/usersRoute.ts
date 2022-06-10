@@ -10,10 +10,9 @@ const userRoute = Router()
 userRoute.post('/allUsers', isAuth, isAdmin, userController.getAllUsers);
 
 userRoute.post('/newUser',[
-    check('firstName')
-    .not()
+    check('firstname').not()
     .isEmpty(),
-    check('lastName')
+    check('lastname')
     .not()
     .isEmpty(),
     check('email')

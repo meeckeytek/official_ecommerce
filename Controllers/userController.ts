@@ -1,4 +1,4 @@
-import bcrypt from "bcryptjs";
+import bcrypt from "bcrypt";
 import * as jwt from "jsonwebtoken";
 import User from "../models/user.model";
 import Trash from "../models/trash.model";
@@ -78,6 +78,7 @@ export const newUser = async (req: any, res: any) => {
     salt = await bcrypt.genSalt(12);
     hashedPassword = await bcrypt.hash(password, salt);
   } catch (error) {
+    console.log(error)
     return res.status(500).json({ message: msg.serverError });
   }
 
