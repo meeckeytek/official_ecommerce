@@ -1,4 +1,4 @@
-import express from "express";
+import express, { RequestHandler } from "express";
 import mongoose from "mongoose";
 import cors from "cors";
 import path from "path"
@@ -12,9 +12,8 @@ dotenv.config();
 
 const app = express();
 
-// app.use('/static', express.static("uploads"))
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.json() as RequestHandler);
+app.use(express.urlencoded({ extended: true }) as RequestHandler);
 app.use(cors());
 
 app.use(express.static(path.join("uploads")));
@@ -24,9 +23,6 @@ app.use("/api/v1/product", productRoute);
 app.use("/api/v1/order", orderRoute);
 app.use("/api/v1/trash", trashRoute);
 
-mongoose.set('useNewUrlParser', true);
-mongoose.set('useFindAndModify', false);
-mongoose.set('useCreateIndex', true);
 mongoose
   .connect(process.env.URI!)
   .then(() => {
