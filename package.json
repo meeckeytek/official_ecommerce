@@ -8,24 +8,9 @@
     "lint": "eslint . --ext .ts",
     "tsc": "tsc",
     "test": "jest",
-    "build": "npm install && npm run tsc",
     "dev": "nodemon --exec ts-node app.ts",
     "start": "node app.js",
     "prod": "npm run build && npm run start"
-  },
-  "jest": {
-    "transform": {
-      "^.+\\.tsx?$": "ts-jest"
-    },
-    "testRegex": "(/_tests_/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
-    "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js",
-      "jsx",
-      "json",
-      "node"
-    ]
   },
   "engines": {
     "node": "16.15.0"
@@ -39,7 +24,6 @@
     "@types/cors": "^2.8.12",
     "@types/dotenv": "^8.2.0",
     "@types/express": "^4.17.13",
-    "@types/jest": "^28.1.1",
     "@types/jsonwebtoken": "^8.5.8",
     "@types/mongoose": "^5.11.96",
     "@types/multer": "^1.4.7",
