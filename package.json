@@ -27,6 +27,9 @@
       "node"
     ]
   },
+  "engines": {
+    "node": "16.15.0"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
