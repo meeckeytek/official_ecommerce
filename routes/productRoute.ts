@@ -1,8 +1,7 @@
 import { Router } from "express";
-import * as productController from "../Controllers/productController";
+import * as productController from "../controllers/productController";
 import upload from "../middlewares/upload";
 import { isAuth, isAdmin } from "../middlewares/util";
-const { check } = require("express-validator");
 
 const productRouter = Router();
 

@@ -1,5 +1,5 @@
 import {Router} from 'express'
-import * as trashController from '../Controllers/trashController'
+import * as trashController from '../controllers/trashController'
 import { isAuth, isAdmin } from "../middlewares/util";
 const trashRouter = Router();
 

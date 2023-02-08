@@ -1,7 +1,6 @@
 import { Router } from "express";
-import * as orderController from "../Controllers/orderController";
+import * as orderController from "../controllers/orderController";
 import { isAuth, isAdmin } from "../middlewares/util";
-const { check } = require("express-validator");
 const orderRouter = Router();
 
 orderRouter.post("/allOrders", isAuth, isAdmin, orderController.getAllOrder);
@@ -45,8 +44,6 @@ orderRouter.patch("/:id/pay", isAuth, orderController.payment);
 
 orderRouter.delete(
   "/deleteOrder/:orderId",
-  check("orderId").not().isEmpty(),
-  isAuth,
   orderController.deleteOrder
 );
 

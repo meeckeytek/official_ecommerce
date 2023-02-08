@@ -1,5 +1,4 @@
 import bcrypt from "bcrypt";
-import * as jwt from "jsonwebtoken";
 import User from "../models/user.model";
 import Trash from "../models/trash.model";
 import msg from "../middlewares/messages";
